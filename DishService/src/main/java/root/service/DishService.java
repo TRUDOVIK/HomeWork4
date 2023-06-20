@@ -6,6 +6,7 @@ import root.InvalidDataException;
 import root.database.model.Dish;
 import root.database.repo.DishRepository;
 
+import java.util.List;
 
 
 @Service
@@ -21,6 +22,10 @@ public class DishService {
     public Dish getDishById(Integer dishId) throws InvalidDataException {
         return dishRepository.findById(dishId)
                 .orElseThrow(() -> new InvalidDataException("Dish not found with ID: " + dishId));
+    }
+
+    public List<Dish> getDishList() throws InvalidDataException {
+        return dishRepository.findAll();
     }
 
     private void validateDish(Dish dish) throws InvalidDataException {

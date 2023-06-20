@@ -8,6 +8,8 @@ import root.InvalidDataException;
 import root.database.model.Dish;
 import root.service.DishService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/dish")
 public class DishController {
@@ -33,6 +35,17 @@ public class DishController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
+    @GetMapping("/menu")
+    public ResponseEntity<List<Dish>> getMenu() {
+        try {
+            List<Dish> dishList = dishService.getDishList();
+            return ResponseEntity.ok(dishList);
+        } catch (InvalidDataException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
 
 
 }
